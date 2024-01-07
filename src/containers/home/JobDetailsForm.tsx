@@ -28,7 +28,6 @@ const JobDetailsForm: React.FC = () => {
         jobLocation: Yup.string().required("Job Location is required"),
       }),
       onSubmit: (values) => {
-        setJobDetails(values)
         setIntTab(true)
         setActiveTab("interview")
       },
