@@ -42,13 +42,17 @@ const DataContext = createContext<{
 const DataProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  // state of all three forms
   const [state, setState] = useState(initialValues);
 
+  // states responsible for unlocking locked tabs
   const [jobTab, setJobTab] = useState(false);
   const [intTab, setIntTab] = useState(false);
 
+  // state used for next and previous buttons
   const [activeTab, setActiveTab] = useState("requisition");
 
+  // modifiying the global state of requisition details
   const setReqDetails = (formData: IRequisitionDetails) => {
     setState((prevState) => ({
       ...prevState,
@@ -56,6 +60,7 @@ const DataProvider: React.FC<{ children: React.ReactNode }> = ({
     }));
   };
 
+  // modifiying the global state of job details
   const setJobDetails = (formData: IJobDetails) => {
     setState((prevState) => ({
       ...prevState,
@@ -63,18 +68,20 @@ const DataProvider: React.FC<{ children: React.ReactNode }> = ({
     }));
   };
 
-  const clearForm = () => {
-    setState(initialValues);
-    setIntTab(false)
-    setJobTab(false)
-    setActiveTab("requisition")
-  };
-
+  // modifiying the global state of interview details
   const setInerSettings = (formData: IInterViewSettings) => {
     setState((prevState) => ({
       ...prevState,
       interviewSettings: formData,
     }));
+  };
+
+  // function for initialising a new form on submit
+  const clearForm = () => {
+    setState(initialValues);
+    setIntTab(false)
+    setJobTab(false)
+    setActiveTab("requisition")
   };
 
   return (
